@@ -1,5 +1,7 @@
 #include <QtGui>
 #include "VideoWidget.h"
+#include <ctime>
+#include <sstream>
 
 // Live mode constructor
 VideoWidget::VideoWidget(int dev, int fps, int width, int height) {
@@ -10,8 +12,27 @@ VideoWidget::VideoWidget(int dev, int fps, int width, int height) {
 	// delete later
     //setFixedSize(width, height);
 
+	time_t t = std::time(0);   // get time now
+    struct tm * now = localtime( & t );
+    int day = (now->tm_mday);
+    int month = (now->tm_mon + 1);
+    int year = (now->tm_year + 1900);
+   	
+    std::ostringstream oss;
+    oss << dev;
+    oss << "_";
+    if (day < 10)
+    	oss << "0";
+    oss << day;
+    if (month < 10)
+    	oss << "0";
+    oss << month;
+    oss << year;
+    
+    string filename = "sur_" + oss.str() + ".avi";
+
 	// Open a writer to save the live feed
-	writer.open("sur.avi", //filename
+    writer.open(filename, //filename
 	 	CV_FOURCC('P','I','M','1'), //codec
 	 	20, //fps
 	 	Size(width, height), //size
@@ -24,10 +45,14 @@ VideoWidget::VideoWidget(int dev, int fps, int width, int height) {
 // History mode constructor
 VideoWidget::VideoWidget(int dev, string date, int width, int height) {
 	liveMode = false;
-	playback.open("dev.avi");
+	std::ostringstream oss;
+    oss << dev;
+    oss << "_";
+    oss << date;
+    readFilename = "sur_" + oss.str() + ".avi";
+
+	playback.open(readFilename);
 	frameCount = 0;
-	// delete later
-    //setFixedSize(width, height);
 
 	timerId = 0;
 	frameRate = 20;
@@ -61,9 +86,12 @@ void VideoWidget::timerEvent(QTimerEvent *event) {
 			if (frameCount < playback.get(CV_CAP_PROP_POS_FRAMES)) {
 				frameCount = playback.get(CV_CAP_PROP_POS_FRAMES);
 			} else {
-				setPlaybackFrame(1);
+				//setPlaybackFrame(1);
+				playback.open(readFilename);
+				frameCount = 0;
+
 			}
-			qDebug() << frameCount;
+			//qDebug() << frameCount;
 		}
 
 		if (frame.empty() == false) {
@@ -122,6 +150,6 @@ Mat VideoWidget::playFrame() {
 }
 
 void VideoWidget::setPlaybackFrame(int index) {
-	qDebug() << index;
-	qDebug() << playback.set(CV_CAP_PROP_POS_AVI_RATIO, 0);
+	//qDebug() << index;
+	//qDebug() << playback.set(CV_CAP_PROP_POS_AVI_RATIO, 0);
 }

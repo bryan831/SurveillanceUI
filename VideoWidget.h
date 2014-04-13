@@ -46,7 +46,7 @@ private:
 	// History Mode
 	VideoCapture playback;
 	int frameCount;
-
+	string readFilename;
 	Mat playFrame();
 };
 
