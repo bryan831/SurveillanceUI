@@ -1,15 +1,18 @@
 #include <QApplication>
-#include "Webcam.h"
+#include "VideoWidget.h"
 #include "stdio.h"
 
 int main(int argc, char **args) {
 	QApplication app(argc, args);
 
 	int dev = 0; // default device 
-	int fps = 25; // 25 frames per second 
+	int fps = 20; // 20 frames per second
+	string date = "";
 	int width = 640;
 	int height = 480;
-	Webcam *view = new Webcam(dev, fps, width, height);
+	VideoWidget *view = new VideoWidget(dev, fps, width, height);
+	VideoWidget *view1 = new VideoWidget(dev, date, width, height);
 	view->show();
+	view1->show();
 	return app.exec();
 }
