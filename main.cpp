@@ -10,6 +10,7 @@ int main(int argc, char **args) {
 	string date = "";
 	int width = 640;
 	int height = 480;
+
 	VideoWidget *view = new VideoWidget(dev, fps, width, height);
 	VideoWidget *view1 = new VideoWidget(dev, date, width, height);
 	view->show();

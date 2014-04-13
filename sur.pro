@@ -5,11 +5,11 @@
 TEMPLATE = app
 TARGET = 
 DEPENDPATH += .
-INCLUDEPATH += .
+INCLUDEPATH += . /usr/local/include/
 
 #include additional compiler info for OpenCV 
 include(opencv.pro)
 
 # Input
 HEADERS +=  VideoWidget.h
-SOURCES += main.cpp VideoWidget.cpp
+SOURCES += main.cpp VideoWidget.cpp SurveillanceWindow.cpp
