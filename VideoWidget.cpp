@@ -8,7 +8,7 @@ VideoWidget::VideoWidget(int dev, int fps, int width, int height) {
 	camera.open(dev);
 
 	// delete later
-	setFixedSize(width, height);
+    //setFixedSize(width, height);
 
 	// Open a writer to save the live feed
 	writer.open("sur.avi", //filename
@@ -21,13 +21,13 @@ VideoWidget::VideoWidget(int dev, int fps, int width, int height) {
 	frameRate = fps;
 }
 
-// Live mode constructor
+// History mode constructor
 VideoWidget::VideoWidget(int dev, string date, int width, int height) {
 	liveMode = false;
 	playback.open("dev.avi");
 	frameCount = 0;
 	// delete later
-	setFixedSize(width, height);
+    //setFixedSize(width, height);
 
 	timerId = 0;
 	frameRate = 20;
@@ -47,7 +47,7 @@ void VideoWidget::showEvent(QShowEvent *event)
 }
 
 void VideoWidget::hideEvent(QHideEvent *event) {
-	killTimer(timerId);
+	//killTimer(timerId);
 }
 
 void VideoWidget::timerEvent(QTimerEvent *event) {

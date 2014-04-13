@@ -8,3 +8,9 @@ LIBS += -L/usr/local/lib \
      -lopencv_ml \
      -lopencv_legacy \
      -lopencv_highgui
+
+HEADERS +=
+
+SOURCES +=
+
+FORMS +=

@@ -11,5 +11,10 @@ INCLUDEPATH += .
 include(opencv.pro)
 
 # Input
-HEADERS +=  VideoWidget.h
-SOURCES += main.cpp VideoWidget.cpp
+HEADERS +=  VideoWidget.h \
+    mainwindow.h
+SOURCES += main.cpp VideoWidget.cpp \
+    mainwindow.cpp
+
+FORMS += \
+    mainwindow.ui

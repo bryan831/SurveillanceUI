@@ -14,7 +14,7 @@ class VideoWidget: public QWidget {
 
 public:
 	//VideoWidget(QWidget*);
-	VideoWidget(int dev,int fps, int width, int height); 
+	VideoWidget(int dev,int fps, int width, int height);
 	VideoWidget(int dev,string date, int width, int height); 
 	~VideoWidget();
 
